@@ -1,4 +1,4 @@
-# Todos <sup><small><small>in progress</small></small></sup>
+# Todos <sup><small><small><small>in progress</small></small></small></sup>
 
 [Realar](https://github.com/betula/realar) TodoMVC implementation.
 

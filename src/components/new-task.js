@@ -1,9 +1,9 @@
 import React from "react";
 import { shared, unit, useOwn } from "realar";
-import { Todo } from "../shared/todo";
+import { Todos } from "../shared/todos";
 
 const Logic = unit({
-  todo: shared(Todo),
+  todos: shared(Todos),
   label: "",
 
   handleChange(ev) {
@@ -13,7 +13,7 @@ const Logic = unit({
     if (ev.nativeEvent.code === "Enter") {
       const label = this.label.trim();
       if (label) {
-        this.todo.add(label);
+        this.todos.add(label);
         this.label = "";
       }
     }

@@ -1,9 +1,9 @@
 import React from "react";
 import { useShared } from "realar";
-import { Todo } from "../shared/todo";
+import { Todos } from "../shared/todos";
 
 export const ClearCompleted = () => {
-  const { completed, deleteCompleted } = useShared(Todo);
+  const { completed, deleteCompleted } = useShared(Todos);
 
   if(completed.length === 0) {
     return null;

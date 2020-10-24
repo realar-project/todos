@@ -1,19 +1,34 @@
 import React from "react";
-import { useShared } from "realar";
-import { Todo } from "../shared/todo";
-import { Filter } from "../shared/filter";
+import { shared, unit, useOwn, useShared } from "realar";
+import { Todos } from "../shared/todos";
+import { Router } from "../shared/router";
 import { ToggleAll } from "./toggle-all";
 import { TodoItem } from "./todo-item";
 
+const Filter = unit({
+  todo: shared(Todos),
+  router: shared(Router),
+
+  get items() {
+    switch (this.router.hash) {
+      case "/active":
+        return this.todo.active;
+      case "/completed":
+        return this.todo.completed;
+      default:
+        return this.todo.items;
+    }
+  },
+});
+
 export const TodoList = () => {
-  const { empty } = useShared(Todo);
-  const { items } = useShared(Filter);
+  const { empty } = useShared(Todos);
+  const { items } = useOwn(Filter);
 
   if (empty) {
     return null;
   }
 
-  // TODO: realar babel plugin bug
   return (
     <section className="main">
       <ToggleAll />

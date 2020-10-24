@@ -1,9 +1,9 @@
 import React from "react";
 import { useShared } from "realar";
-import { Todo } from "../shared/todo";
+import { Todos } from "../shared/todos";
 
 export const ToggleAll = () => {
-  const { active, toggleAll } = useShared(Todo);
+  const { active, toggleAll } = useShared(Todos);
   return (
     <>
       <input
