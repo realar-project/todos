@@ -6,17 +6,17 @@ import { ToggleAll } from "./toggle-all";
 import { TodoItem } from "./todo-item";
 
 const Filter = unit({
-  todo: shared(Todos),
+  todos: shared(Todos),
   router: shared(Router),
 
   get items() {
     switch (this.router.hash) {
       case "/active":
-        return this.todo.active;
+        return this.todos.active;
       case "/completed":
-        return this.todo.completed;
+        return this.todos.completed;
       default:
-        return this.todo.items;
+        return this.todos.items;
     }
   },
 });
