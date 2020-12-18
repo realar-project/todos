@@ -1,15 +1,15 @@
 import React from "react";
-import { shared, unit, useOwn, useShared } from "realar";
-import { Todos } from "../shared/todos";
-import { Router } from "../shared/router";
+import { sel, use } from "realar";
+import { sharedTodos } from "../shared/todos";
+import { sharedRouter } from "../shared/router";
 import { ToggleAll } from "./toggle-all";
 import { TodoItem } from "./todo-item";
 
-const Filter = unit({
-  todos: shared(Todos),
-  router: shared(Router),
+class Filter {
+  router = sharedRouter();
+  todos = sharedTodos();
 
-  get items() {
+  @sel get items() {
     switch (this.router.hash) {
       case "/active":
         return this.todos.active;
@@ -18,14 +18,14 @@ const Filter = unit({
       default:
         return this.todos.items;
     }
-  },
-});
+  }
+}
 
 export const TodoList = () => {
-  const { empty } = useShared(Todos);
-  const { items } = useOwn(Filter);
+  const todos = sharedTodos();
+  const filter = use(Filter);
 
-  if (empty) {
+  if (todos.empty) {
     return null;
   }
 
@@ -33,8 +33,10 @@ export const TodoList = () => {
     <section className="main">
       <ToggleAll />
       <ul className="todo-list">
-        {items.map((item, index) => <TodoItem key={index} item={item} />)}
+        {filter.items.map((item, index) => (
+          <TodoItem key={index} todo={item} />
+        ))}
       </ul>
     </section>
-  )
+  );
 };

@@ -1,8 +1,10 @@
-# Todos <sup><small><small><small>in progress</small></small></small></sup>
+# Todos
 
 [Realar](https://github.com/betula/realar) TodoMVC implementation.
 
-Try It on your computer.
+[See wrapped version on CodeSandbox](https://codesandbox.io/s/realar-todos-f198t?file=/src/shared/todos.ts),
+
+Or try It on your computer.
 
 ```bash
 git clone git@github.com:realar-project/todos.git
