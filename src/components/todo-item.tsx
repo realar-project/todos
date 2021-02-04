@@ -1,12 +1,12 @@
-import React, { useEffect, useLayoutEffect } from "react";
-import { box, use } from "realar";
+import React, { useLayoutEffect } from "react";
+import { effect, prop, useLocal } from "realar";
 import { sharedTodos, Todo } from "../shared/todos";
 
 class Form {
   todos = sharedTodos();
 
-  @box editing = false;
-  @box label = "";
+  @prop editing = false;
+  @prop label = "";
 
   todo: Todo;
   inputRef: React.RefObject<HTMLInputElement>;
@@ -62,18 +62,18 @@ class Form {
     }
   };
 
-  effect = () => {
-    window.addEventListener("click", this.handleBodyClick);
-    window.addEventListener("keydown", this.handleBodyKeyDown);
-    return () => {
-      window.removeEventListener("click", this.handleBodyClick);
-      window.removeEventListener("keydown", this.handleBodyKeyDown);
-    };
-  };
-
   constructor(todo: Todo) {
     this.todo = todo;
     this.inputRef = React.createRef();
+
+    effect(() => {
+      window.addEventListener("click", this.handleBodyClick);
+      window.addEventListener("keydown", this.handleBodyKeyDown);
+      return () => {
+        window.removeEventListener("click", this.handleBodyClick);
+        window.removeEventListener("keydown", this.handleBodyKeyDown);
+      };
+    });
   }
 }
 
@@ -82,8 +82,7 @@ interface Props {
 }
 
 export const TodoItem: React.FC<Props> = ({ todo }) => {
-  const form = use(Form, [todo]);
-  useEffect(() => form.effect(), [form]);
+  const form = useLocal(Form, [todo]);
   useLayoutEffect(() => form.focus(), [form.editing, form]);
 
   return (

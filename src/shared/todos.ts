@@ -1,4 +1,4 @@
-import { sel, box, reaction, shared } from "realar";
+import { cache, prop, on, shared } from "realar";
 
 export interface Todo {
   label: string;
@@ -6,15 +6,15 @@ export interface Todo {
 }
 
 export class Todos {
-  @box items: Todo[] = [];
+  @prop items: Todo[] = [];
 
   get empty() {
     return this.items.length === 0;
   }
-  @sel get active() {
+  @cache get active() {
     return this.items.filter((item) => !item.completed);
   }
-  @sel get completed() {
+  @cache get completed() {
     return this.items.filter((item) => item.completed);
   }
 
@@ -55,7 +55,7 @@ export class Todos {
       this.items = JSON.parse(data);
     }
 
-    reaction(
+    on(
       () => this.items,
       (items) => {
         localStorage.setItem("todos", JSON.stringify(items));

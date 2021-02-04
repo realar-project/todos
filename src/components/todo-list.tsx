@@ -1,5 +1,5 @@
 import React from "react";
-import { sel, use } from "realar";
+import { cache, useLocal } from "realar";
 import { sharedTodos } from "../shared/todos";
 import { sharedRouter } from "../shared/router";
 import { ToggleAll } from "./toggle-all";
@@ -9,7 +9,7 @@ class Filter {
   router = sharedRouter();
   todos = sharedTodos();
 
-  @sel get items() {
+  @cache get items() {
     switch (this.router.hash) {
       case "/active":
         return this.todos.active;
@@ -23,7 +23,7 @@ class Filter {
 
 export const TodoList = () => {
   const todos = sharedTodos();
-  const filter = use(Filter);
+  const filter = useLocal(Filter);
 
   if (todos.empty) {
     return null;

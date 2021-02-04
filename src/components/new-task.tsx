@@ -1,11 +1,11 @@
 import React from "react";
-import { box, use } from "realar";
+import { prop, useLocal } from "realar";
 import { sharedTodos } from "../shared/todos";
 
 class Form {
   todos = sharedTodos();
 
-  @box label = "";
+  @prop label = "";
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.label = event.target.value;
@@ -22,7 +22,7 @@ class Form {
 }
 
 export const NewTask = () => {
-  const form = use(Form);
+  const form = useLocal(Form);
 
   return (
     <input

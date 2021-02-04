@@ -1,7 +1,7 @@
-import { box, shared } from "realar";
+import { prop, shared } from "realar";
 
 export class Router {
-  @box hash = "";
+  @prop hash = "";
 
   isActiveHash = (to: string) => {
     return this.hash === to || (to === "/" && this.hash === "");
