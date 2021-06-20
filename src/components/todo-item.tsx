@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react";
-import { effect, prop, useLocal } from "realar";
+import { prop, un, useLocal } from "realar";
 import { sharedTodos, Todo } from "../shared/todos";
 
 class Form {
@@ -62,18 +62,21 @@ class Form {
     }
   };
 
+  private bindBodyClick() {
+    window.addEventListener("click", this.handleBodyClick);
+    window.addEventListener("keydown", this.handleBodyKeyDown);
+
+    un(() => {
+      window.removeEventListener("click", this.handleBodyClick);
+      window.removeEventListener("keydown", this.handleBodyKeyDown);
+    });
+  }
+
   constructor(todo: Todo) {
     this.todo = todo;
     this.inputRef = React.createRef();
 
-    effect(() => {
-      window.addEventListener("click", this.handleBodyClick);
-      window.addEventListener("keydown", this.handleBodyKeyDown);
-      return () => {
-        window.removeEventListener("click", this.handleBodyClick);
-        window.removeEventListener("keydown", this.handleBodyKeyDown);
-      };
-    });
+    this.bindBodyClick();
   }
 }
 

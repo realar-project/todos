@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es2015", "es6", "dom"],
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": false,
+    "experimentalDecorators": true,
+    "jsx": "react"
+  }
+}

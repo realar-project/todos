@@ -1,6 +1,6 @@
 {
   "name": "todos",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Realar todomvc",
   "repository": {
     "url": "https://github.com/realar-project/todos"
@@ -11,7 +11,7 @@
   "dependencies": {
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "realar": "0.5.x",
+    "realar": "0.6.1",
     "todomvc-app-css": "2.3.0"
   },
   "devDependencies": {
